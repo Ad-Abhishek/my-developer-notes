@@ -1,32 +1,35 @@
-
 # Working with Mongoose Notes
 
 ## Basic Mongoose
 
 ### Create user:
+
 1. `const user = User.create({ name: 'Max', age: 23 })`
-   
 2. `const user = new User({ name: 'Max', age: 23})`
 
 ### Update user name:
+
 `user.name = "John"`
 
 ### Change actual version in db
+
 `user.save()`
 
 ### Difference between create() and save()
+
 If you call .create(), behind the scenes, it calls .save().
 It means, if I am using .create() like this:
 
-```const John = await User.create({name: 'John', age: 99});```
+`const John = await User.create({name: 'John', age: 99});`
 
 Then, this is hapenning behind the scenes:
 
-```const John = await new User.create({name: 'John', age: 99}).save();```
+`const John = await new User.create({name: 'John', age: 99}).save();`
 
 ## Schema Types
+
 ```json
-    const addressSchema = new mongoose.Schema({          
+    const addressSchema = new mongoose.Schema({
         street: String,
         city: String
     })
@@ -44,6 +47,7 @@ Then, this is hapenning behind the scenes:
 ```
 
 ## Handling Errors
+
 ```json
 const run = async () => {
     try {
@@ -65,6 +69,7 @@ run()
 ```
 
 ## Schema Validation
+
 ```json
 const userSchema = new mongoose.Schema({
   name: String,
@@ -82,12 +87,12 @@ const userSchema = new mongoose.Schema({
    minLength: 10,
    required: true,
    lowercase: true,
-  },  
+  },
   createdAt:{
     type: Date,
     immutable: true,
     default: () => Date.now(),
-  }, 
+  },
   updatedAt: {
     type: Date,
     immutable: true,
@@ -99,11 +104,14 @@ const userSchema = new mongoose.Schema({
 });
 
 ```
+
 Issue with Schema Validation (Built in / Custom):
+
 ```json
 It's only going to run when you use create() or save() function.
 Rest of the methods do not undergo validation.
 ```
+
 It's always recommended to:
 
 findById() or findOne() and save()
@@ -125,7 +133,6 @@ await User.findOne({name: "Leo"})
 user.updateOne({age: 23}, { $set: {age: 32} })
 ```
 
-
 ```json
 const user = await User.where("age")
     .gt(12)
@@ -138,6 +145,7 @@ console.log(user)
 ```
 
 ### Passing refence to the Schema
+
 ```json
 bestFriend: {
     type: mongoose.SchemaTypes.ObjectId,
@@ -147,6 +155,7 @@ bestFriend: {
 ```
 
 ### .populate("bestFriend") would log:
+
 ```bash
 [
   {
@@ -173,22 +182,26 @@ bestFriend: {
   }
 ]
 ```
+
 With .populate(), we can do join without really using join()
 
-## Schema methods 
+## Schema methods
 
 ```json
 userSchema.methods.sayHi = function() {
     console.log(`Hi, my name is ${this.name}`)
 }
 ```
+
 ```json
 const user = await User.findOne({ name: "Leo"})
 console.log(user)
 user.sayHi()
 
 ```
+
 This would log:
+
 ```json
 {
   _id: new ObjectId('66bbd35a6d627daabfed37e1'),
@@ -208,6 +221,7 @@ Hi, my name is Leo
 ```
 
 ### Static level methods
+
 They are available in the Model, not only the instances
 
 ```json
@@ -215,13 +229,16 @@ userSchema.statics.findByName = function(name) {
     return this.where({ name: new RegExp(name, "i" )})
 }
 ```
+
 ```json
 const user = await User.findByName("Leo")
 console.log(user)
 ```
+
 This would log all the users with the name "Leo".
 
 ### Query level methods
+
 ```json
 userSchema.statics.findByName = function(name) {
     return this.find({ name: new RegExp(name, "i" )})
@@ -236,18 +253,22 @@ userSchema.query.byName = function(name) {
 const user = await User.find().byName("Leo")
 console.log(user)
 ```
+
 This would log all the users with the name "Leo" exactly like the above example.
 
 ### Virtuals
+
 ```json
 userSchema.virtual('namedEmail').get(function() {
     return `${this.name} <${this.email}>`
 })
 ```
+
 ```json
 const user = await User.findOne({ name: "Leo"})
 console.log(user.namedEmail)
 ```
+
 This would log:
 
 ```json
@@ -255,15 +276,18 @@ Leo <abc@abc.com>
 ```
 
 ## Schema middleware
+
 ```json
 userSchema.pre("save", function(next) {
     this.updatedAt = Date.now()
     next()
 })
 ```
+
 ```json
 const user = await User.findOne({ name: "Leo"})
 await user.save()
 console.log(user)
 ```
+
 This would update updatedAt to current date everytime save funtion is called.
