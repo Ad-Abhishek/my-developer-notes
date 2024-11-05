@@ -1,0 +1,187 @@
+1. JavaScript Fundamentals
+Topics:
+------
+* ES6+ features (e.g., arrow functions, destructuring, rest/spread operators, let and const)
+* Promises, async/await
+* Closures, hoisting, scope
+* Event loop and asynchronous programming
+
+Potential Questions:
+--------------------
+# Explain the difference between var, let, and const.
+# How do closures work in JavaScript?
+# What is the event loop, and how does it work?
+# What are promises, and how do they help with asynchronous code?
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+1. Variable Declarations: var, let, and const
+---------------------------------------------
+Explanation:
+
+var: Function-scoped, can be redeclared, and hoisted (declared before its initialization).
+let: Block-scoped, cannot be redeclared in the same scope, but can be reassigned.
+const: Block-scoped, cannot be redeclared or reassigned after initial assignment.
+Key Concepts:
+
+Hoisting (variables declared with var are hoisted but not initialized)
+Temporal dead zone (for let and const)
+Questions:
+
+Q. What is the difference between var, let, and const?
+->	 
+Feature			var									let								const
+--------------------------------------------------------------------------------------------------
+Scope			Function-scoped						Block-scoped					Block-scoped
+Hoisting		Yes (initialized to undefined)		Yes (TDZ until declaration)		Yes (TDZ until declaration)
+Redeclaration	Allowed								Not allowed in the same scope	Not allowed in the same scope
+Reassignment	Allowed								Allowed							Not allowed (unless object/array mutation)
+Initialization	Optional (initialized to undefined)	Optional						Required (must be initialized when declared)
+
+TDZ = (temporal dead zone)
+
+
+Q. Can you explain the concept of hoisting?
+->  var: Hoisted and initialized to undefined. Accessing it before the initialization will return undefined, not an error.
+let and const: Hoisted but uninitialized. Accessing them before initialization throws a ReferenceError due to the Temporal Dead Zone.
+Function declarations: Fully hoisted, allowing them to be called before their definition in the code.
+Function expressions (using var, let, or const): The variable is hoisted, but the assignment (the function itself) is not, leading to errors if called before initialization.
+
+console.log(a);  // undefined
+var a = 5;
+
+console.log(b);  // ReferenceError
+let b = 10;
+
+foo();           // "Function Declaration"
+
+function foo() {
+  console.log("Function Declaration");
+}
+
+bar();           // Error: bar is not a function
+var bar = function() {
+  console.log("Function Expression");
+};
+
+
+Q. Why should we prefer let and const over var?
+-> 
+	- Block Scope(let, const) Vs Function Scope(var)
+	- No Hoisting confusion
+	- Avoiding accendential redeclarations
+	- Reassignment control with const
+	- Cleaner code and readability
+	- Better for Asynchronous Programming
+	
+	
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+2. Arrow Functions
+Explanation:
+
+Arrow functions provide a shorter syntax for writing functions.
+They do not have their own this context (they inherit this from their lexical scope).
+Example:
+
+const add = (a, b) => a + b;
+
+Questions:
+
+Q. What is an arrow function, and how is it different from a regular function?
+-> 
+	// Regular function expression
+	const add = function(a, b) {
+	  return a + b;
+	};
+
+	// Arrow function
+	const add = (a, b) => a + b;
+
+Q. How does the this context behave in arrow functions?
+-> 
+Lexically Scoped: Arrow functions inherit this from the surrounding context, and it remains constant regardless of how or where the function is called.
+No Dynamic this: Unlike regular functions, arrow functions do not get their this value from the object they are called on. Instead, this is determined by where the function is defined.
+Ideal for Callbacks: Arrow functions are often used in callbacks, event handlers, or asynchronous code to avoid common issues with this.
+Cannot Be Changed: The value of this inside an arrow function cannot be changed using call(), apply(), or bind().
+
+This lexical scoping of this makes arrow functions a good fit for situations where you need to preserve the this context from the surrounding code.
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+3. Closures
+Explanation:
+
+A closure is a function that has access to its own scope, the outer function’s variables, and the global variables.
+They are created every time a function is created, at function creation time.
+
+Example:
+
+function outer() {
+  let count = 0;
+  return function inner() {
+    count++;
+    console.log(count);
+  };
+}
+const counter = outer();
+counter(); // 1
+counter(); // 2
+
+Questions:
+
+Q. Can you explain what a closure is and provide an example?
+->	A closure is created when an inner function retains access to the variables of its outer function even after the outer function has finished executing.
+ Closures allow JavaScript functions to have private variables, encapsulate data, and maintain state across executions. They are powerful tools for managing scope and controlling variable access
+ in more complex JavaScript applications. 
+ Example: given above
+
+Q. How are closures used in JavaScript, and what are their benefits?
+-> Closures are a powerful feature of JavaScript that enable functions to retain access to their outer scope even after the outer function has finished executing. They are widely used in various 
+scenarios like maintaining state, encapsulating data, handling asynchronous tasks, and creating modular, reusable functions. The benefits include better data privacy, easier state management, 
+and the ability to write cleaner, more modular code.
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+4. Asynchronous JavaScript: Callbacks, Promises, Async/Await
+Callbacks:
+A callback is a function passed as an argument to another function, to be “called back” later.
+
+Promises:
+A Promise represents the eventual completion (or failure) of an asynchronous operation.
+States: pending, resolved, and rejected.
+
+Async/Await:
+async functions return a promise.
+await pauses the execution of an async function until the promise is resolved.
+
+Example (Promises):
+
+function fetchData() {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve("Data fetched!");
+    }, 1000);
+  });
+}
+fetchData().then(data => console.log(data));
+
+Example (Async/Await):
+
+async function getData() {
+  const data = await fetchData();
+  console.log(data);
+}
+getData();
+
+Questions:
+
+Q. How does the event loop work in JavaScript?
+-> 
+
+Q. What is the difference between a callback, a promise, and async/await?
+->
+
+Q. How do promises handle asynchronous operations?
+->

@@ -1,0 +1,38 @@
+1. Reverse a String:
+
+let word = 'Abhishek';
+
+function reverse(word) {
+  return word.split('').reverse().join('');
+}
+
+console.log(reverse(word));
+
+
+-------------------------------------
+
+2. What is template literal syntax, and how is it different from regular strings?
+-> Template literals use backticks (`) and support multi-line strings and expressions 
+	within placeholders ${expression}.
+
+-------------------------------------
+
+3. Count Vowels:
+
+function countVowels(word) {
+  return (word.match(/[aeiou]/gi) || []).length;
+}
+
+--------------------------------
+
+4. is the string a plaindrome(eg: ramar )
+-> let word = 'ramar';
+
+function isPalindrome(word) {
+  return word === word.split('').reverse().join('');
+}
+
+console.log(isPalindrome(word));
+
+-------------------------------------
+
