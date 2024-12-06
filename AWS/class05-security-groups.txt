@@ -1,0 +1,29 @@
+AWS-05-12
+-------
+
+Security Groups:
+1. Firewall / Contains all rules (What is allowed / not allowed)
+2. Inbound Rules (all are disabled by default)
+	Protocol -- Port -- <From where they can access>
+	 HTTP		 80			My IP only / Everyone(0.0.0.0)
+	 
+3. Outbound Rules (all are enabled by default)
+4. One SG can be used for Multiple Instances.
+5. they are free to create and use.
+
+NOTE:
+	better to use one SG for same type/group of 
+	
+
+# Service For => Protocol: PORT Number:
+	Windows => RDP:3389
+	Linux => SSH:22
+	Webserver => HTTP:80
+	HTTPS => HTTPS:443
+	
+6. We can create SG while creating EC2 or before EC2 creation.
+7. AWS provides on default SG. Default security groups cannot be deleted.
+8. If a SG is connected with any instances then it can not be deleted.
+	Even if instances are deleted, SG is not deleted by default.You have 
+	to delete it on your own if you want.
+	

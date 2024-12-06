@@ -1,0 +1,22 @@
+# static keyword:
+-------------
+static int count; 
+
+- this implies that count is a class property not an object property.
+
+- To access count, we dont need to create any object.
+OR
+	it can be accessed directly through class.
+	
+==========================================================
+
+# this keyword:
+--------------
+- used to call one constructor from another constructor
+eg:
+public Person() {
+	count++;
+	S
+
+- used to access parameters of this class.
+eg:

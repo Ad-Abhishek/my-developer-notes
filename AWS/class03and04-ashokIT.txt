@@ -1,0 +1,50 @@
+AWS-03-12
+-------
+
+1. EC2 is a VM(Virtual Machine)
+
+2. EC2 Requirements(Concepts):	
+	1. Compute / Instance Type  - vCPU (virtualized CPU), RAM 
+	2. Storage - EBS (Elastic Block Store)
+	3. Network - VPC(Virtual Private Cloud)
+	4. OS Template - Ubuntu, RedHat, CentOS (+additional s/w based on template config)
+		AMI(Amazon Machine Image)
+	5. Security Group - Firewall
+		(What is allowed/ What is not from outside world)
+	6. KeyPair [Public + Private Key(.pem)]
+		
+3. IP Address
+	A unique number given to a machine in a network
+	1. Private IP (Within a Network/ VPC)
+	2. Public IP (Outside  World) [If we stop and start then new Public IP is assigned)
+	3. Elastic IP (Fixed/Static IP for your machine)
+	 
+	* EC2 Instance:
+		restart - no new Public IP 
+		stop/start - new Public IP address
+	    
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+AWS-04-12
+-------
+In Linux machine, to do remote connection:
+	Protocol: SSH
+	PORT: 22
+
+
+EC@ Instance State:
+	pending - about to create / being allocated
+	running - launched successfully & ready to accept and process requests
+	stopped - shut down , can be used again
+	terminated - destroying everything, cant be used again
+	stopping - process of being stopped
+	starting- process of being started
+	rebooting - restarting, shut down and start again
+	
+Note:
+	if we reboot our EC2 instance, public IP wont be changed.
+	if we stop/start our EC2 instance, public IP will be changed.
+	if we terminate our EC2 instance, AWS will delete our EC2 instance.
+
+		
+
+
