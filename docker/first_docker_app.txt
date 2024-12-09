@@ -1,0 +1,32 @@
+first docker app:
+
+1. Create a Dockerfile
+	FROM node:16.17.0-alpine
+
+	WORKDIR /app
+
+	COPY package*.json ./
+
+	RUN npm install
+
+	COPY index.js ./
+
+	CMD ["node", "index.js"]
+	
+2. Build an image from Dockerfile
+	docker build -t node-docker-app .
+	
+3. Run the image to make a container
+	docker run --name doc-nod-app -p 7070:7070 node-docker-app
+
+
+
+
+Notes:
+-> RUN instructions will execute while creating the image.
+-> We can write multiple RUN commands.
+-> CMD instructions will execute while creating the container.
+-> We cant use CMD to execute multiple commands.
+-> If we define multiple CMD commands then the last one will be executed.
+-> ENTRYPOINTS can't be overridden
+

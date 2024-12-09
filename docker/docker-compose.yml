@@ -1,0 +1,55 @@
+Dockerfile : Contains instructions to create an Image
+FROM
+EXPOSE
+CMD
+RUN
+ENTRYPOINT
+DockerImage : Packaged Software (Code + Dependencies)
+DockerHub(Register) : A Place to store Docker Images
+DockerContainer : Running/Execution form of Image
+DockertNetwork  : Connection between container.
+DockerVolumes   : Persisted Storage to share data between containers.
+----------------------------------------------------------------------
+Docker Compose: 
+-> It is a YAML file
+-> To create and connect multiple containers.
+-> It avoids executing multiple docker commands.
+-> You can even define order of creating containers.
+-> We can provide network creation,connections.
+-> We can even specify volums to be created and connected.
+-> using 'docker-compose up' docker creates all above setup.
+   using 'docker-compose down' docker remvoes all above setup (not volumes)
+file name: docker-compose.yml.  
+
+---------------------------------------------
+Example: docker-compose.yml
+--------------------------
+
+version: '3'
+
+services:
+    mysqldb:
+        image: mysql:latest
+        restart: always 
+        environment:
+            - MYSQL_ROOT_PASSWORD: secret
+            - MYSQL_DATABASE: springdb 
+        volumes:
+            - mysqldb-data:/var/lib/mysql
+        networks:
+            - my-app-nw
+            
+    my-app:
+        image: spring-boot-mysql-app:latest
+        ports:
+            - 8080:8080
+        depends_on:
+            - mysqldb
+        networks:
+            - my-app-nw
+           
+networks:
+    my-app-nw:
+   
+volumes:
+    mysqldb-data:
