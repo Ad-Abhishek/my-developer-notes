@@ -2,5 +2,5 @@
     "name": "abc token",
     "symbol": "ABC",
     "description": "This is a new token.",
-    "image": ""
+    "image": "https://raw.githubusercontent.com/deadpoolmeta/metadata/main/companeons/vcomp.png"
 }
