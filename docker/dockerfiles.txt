@@ -34,7 +34,7 @@ CMD echo "B"
 CMD echo "C"
 --------------------------------
 docker build -t <image-name> -f <docker-filename-with-location>
-for eg:
+example:
 docker build -t my-test-img .
 docker build -t my-test-img -f docker-file
 docker build -t my-test-img -f /home/docker/data/docker-file
