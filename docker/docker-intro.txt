@@ -28,7 +28,7 @@ Dockerfile
 
 =======================================
 
-Image Links:
+Picture Links:
 
 https://raw.githubusercontent.com/javabyraghu/DevOps630AM/045257dd42288d6d384df5ff7aab7127fefc9831/Images/DevOps_03062023_1.png
 
