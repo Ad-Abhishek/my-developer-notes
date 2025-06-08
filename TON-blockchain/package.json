@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "bip39": "^3.1.0",
+    "tonweb": "^0.0.66",
+    "tweetnacl": "^1.0.3"
+  }
+}
