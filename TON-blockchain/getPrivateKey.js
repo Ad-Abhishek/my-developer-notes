@@ -5,7 +5,7 @@ const nacl = require("tweetnacl");
 // Your 24-word mnemonic phrase
 // const mnemonic = "YOUR 24-WORD PHRASE HERE";
 const mnemonic =
-  "door grape ready more velvet sunset ..... all 24 words in a single string";
+  "door grape ready more velvet sunset ....... all 24 words in a single string";
 
 (async () => {
   const seed = await bip39.mnemonicToSeed(mnemonic);
